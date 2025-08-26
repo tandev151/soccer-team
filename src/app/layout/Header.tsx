@@ -2,6 +2,7 @@
 
 import LanguageSwicher from '@/components/LanguageSwitcher/LanguageSwicher';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 
 export const Header = () => {
@@ -59,21 +60,21 @@ export const Header = () => {
           </div>
           
           <nav className="flex items-center space-x-10">
-            <a href="/" className="text-white hover:text-yellow-300 transition-colors text-lg font-semibold tracking-wide">
+            <Link href="/" className="text-white hover:text-yellow-300 transition-colors text-lg font-semibold tracking-wide">
               Home
-            </a>
-            <a href="/team" className="text-white hover:text-yellow-300 transition-colors text-lg font-semibold tracking-wide">
+            </Link>
+            <Link href="/team" className="text-white hover:text-yellow-300 transition-colors text-lg font-semibold tracking-wide">
               Team
-            </a>
-            <a href="/matches" className="text-white hover:text-yellow-300 transition-colors text-lg font-semibold tracking-wide">
+            </Link>
+            <Link href="/matches" className="text-white hover:text-yellow-300 transition-colors text-lg font-semibold tracking-wide">
               Matches
-            </a>
-            <a href="/news" className="text-white hover:text-yellow-300 transition-colors text-lg font-semibold tracking-wide">
+            </Link>
+            <Link href="/news" className="text-white hover:text-yellow-300 transition-colors text-lg font-semibold tracking-wide">
               News
-            </a>
-            <a href="/about" className="text-white hover:text-yellow-300 transition-colors text-lg font-semibold tracking-wide">
+            </Link>
+            <Link href="/about" className="text-white hover:text-yellow-300 transition-colors text-lg font-semibold tracking-wide">
               About
-            </a>
+            </Link>
           </nav>
           
           <div className="flex items-center space-x-4">
