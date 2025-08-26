@@ -1,9 +1,27 @@
 // components/Card.jsx
 'use client';
+import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import React, { useState } from 'react';
 
-const Card = () => {
+type Props = {
+  className?: string;
+  playerData: Player;
+  isSelected?: boolean;
+};
+
+// 1. Định nghĩa kiểu dữ liệu cho một cầu thủ (ví dụ)
+export type Player = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  number: number;
+  imageSrc: string;
+  position: string;
+  logo: string;
+};
+
+const Card = ({ className, playerData, isSelected }: Props) => {
   // Bước 1: Sử dụng useState để quản lý trạng thái ACTIVE
   const [isActive, setIsActive] = useState(false);
 
@@ -15,7 +33,11 @@ const Card = () => {
   return (
     // Container chính cho hiệu ứng 3D, thêm 'group' để kích hoạt hiệu ứng hover cho các phần tử con
     <div
-      className='group w-[250px] h-[400px] bg-transparent'
+      className={cn(
+        'group w-[250px] h-[400px] bg-transparent',
+        className,
+        isSelected ? 'bg-amber-500' : ''
+      )}
       style={{ perspective: '1000px' }} // Thuộc tính này cần thiết cho hiệu ứng 3D
       onClick={handleCardClick}>
       {/* Wrapper cho hiệu ứng lật. Trạng thái 'isActive' sẽ thêm class để xoay thẻ */}
@@ -35,7 +57,7 @@ const Card = () => {
           <div className='relative bg-transparent w-full h-full opacity-60'></div>
           {/* Logo 'MF' */}
           <div className='absolute top-[20px] right-2 bg-gradient-to-bl from-orange-900 to-red-400 w-[50px] h-[30px] rounded-4xl flex justify-center items-center font-bold text-white'>
-            MF
+            {playerData?.position}
           </div>
           {/* Nội dung chính của mặt trước */}
           <div className='absolute top-0 left-0 right-0 flex flex-col items-center w-full '>
@@ -53,13 +75,13 @@ const Card = () => {
             {/* Thông tin cầu thủ */}
             <div className='absolute bottom-[-50px] flex flex-col items-center bg-gradient-to-bl from-orange-200 to-red-400 w-full rounded-tl-lg rounded-br-lg z-10 p-2'>
               <div className='absolute -top-8 rounded-full bg-red-900 font-bold text-2xl text-white w-[60px] h-[60px] flex justify-center items-center border-4 border-orange-200'>
-                10
+                {playerData.number}
               </div>
               <div className='mt-6 text-2xl font-semibold text-shadow-amber-200'>
-                Leo
+                {playerData.firstName}
               </div>
               <div className='text-4xl font-semibold text-shadow-amber-200'>
-                Messi
+                {playerData.lastName}
               </div>
             </div>
           </div>
