@@ -73,11 +73,11 @@ export const Carousel = <T,>({
     <div className='embla outline-1'>
       <div className='embla__viewport ' ref={emblaRef}>
         {/* embla__container: chứa tất cả các slide */}
-        <div className='embla__container'>
+        <div className='embla__container mt-20'>
           {/* - Dùng `items.map` thay vì `React.Children.map`. */}
           {/* - Gọi hàm `children` (render prop) để render nội dung slide. */}
           {items.map((item, index) => (
-            <div className='embla__slide outline-1' key={index}>
+            <div className='embla__slide' key={index}>
               {children(item, selectedIndex === index)}
             </div>
           ))}

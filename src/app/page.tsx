@@ -40,6 +40,24 @@ const playersData: Player[] = [
     imageSrc: '/messi.png',
     logo: 'KM',
     position: 'LM'
+  },
+  {
+    id: 5,
+    firstName: 'Kylian',
+    lastName: 'Mbappé',
+    number: 9,
+    imageSrc: '/messi.png',
+    logo: 'KM',
+    position: 'LM'
+  },
+  {
+    id: 6,
+    firstName: 'Kylian',
+    lastName: 'Mbappé',
+    number: 9,
+    imageSrc: '/messi.png',
+    logo: 'KM',
+    position: 'LM'
   }
   // Thêm các cầu thủ khác...
 ];

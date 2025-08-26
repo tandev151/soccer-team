@@ -36,7 +36,7 @@ const Card = ({ className, playerData, isSelected }: Props) => {
       className={cn(
         'group w-[250px] h-[400px] bg-transparent',
         className,
-        isSelected ? 'bg-amber-500' : ''
+        isSelected ? 'bg-blue-500' : ''
       )}
       style={{ perspective: '1000px' }} // Thuộc tính này cần thiết cho hiệu ứng 3D
       onClick={handleCardClick}>
@@ -62,7 +62,13 @@ const Card = ({ className, playerData, isSelected }: Props) => {
           {/* Nội dung chính của mặt trước */}
           <div className='absolute top-0 left-0 right-0 flex flex-col items-center w-full '>
             {/* Vùng chứa hình ảnh cầu thủ */}
-            <div className='mt-12 w-[280px] h-[280px] transition-transform  group-hover:scale-110 duration-500 group-hover:-translate-y-4 '>
+            <div
+              className={cn(
+                'mt-12 w-[280px] h-[280px] transition-transform duration-500',
+                isSelected
+                  ? 'scale-150 translate-y-2 group-hover:scale-180 group-hover:-translate-y-5'
+                  : ''
+              )}>
               <Image
                 src='/messi.png' // Hãy chắc chắn bạn có ảnh này trong thư mục /public
                 alt='Lionel Messi'
@@ -73,14 +79,32 @@ const Card = ({ className, playerData, isSelected }: Props) => {
             </div>
 
             {/* Thông tin cầu thủ */}
-            <div className='absolute bottom-[-50px] flex flex-col items-center bg-gradient-to-bl from-orange-200 to-red-400 w-full rounded-tl-lg rounded-br-lg z-10 p-2'>
-              <div className='absolute -top-8 rounded-full bg-red-900 font-bold text-2xl text-white w-[60px] h-[60px] flex justify-center items-center border-4 border-orange-200'>
+            <div className='absolute bottom-[-50px] flex flex-col items-center bg-transparent w-full rounded-tl-lg rounded-br-lg z-10 p-2'>
+              <div
+                className={cn(
+                  'absolute -top-8 rounded-full bg-red-900 font-bold text-2xl text-white w-[60px] h-[60px] flex justify-center items-center border-4 border-orange-200',
+                  isSelected
+                    ? 'transition-all duration-300 [text-shadow:1px_1px_2px_#78350f group-hover:[box-shadow:0_0_1px_#fff,0_0_10px_#fff,0_0_15px_#f59e0b,0_0_20px_#f59e0b] group-hover:[text-shadow:0_0_1px_#fff,0_0_10px_#fff,0_0_15px_#f59e0b,0_0_20px_#f59e0b]'
+                    : ''
+                )}>
                 {playerData.number}
               </div>
-              <div className='mt-6 text-2xl font-semibold text-shadow-amber-200'>
+              <div
+                className={cn(
+                  'mt-6 text-2xl font-semibold text-shadow-amber-900',
+                  isSelected
+                    ? 'transition-all duration-300 [text-shadow:1px_1px_2px_#78350f] group-hover:text-white group-hover:[text-shadow:0_0_1px_#fff,0_0_10px_#fff,0_0_15px_#f59e0b,0_0_20px_#f59e0b]'
+                    : ''
+                )}>
                 {playerData.firstName}
               </div>
-              <div className='text-4xl font-semibold text-shadow-amber-200'>
+              <div
+                className={cn(
+                  'text-4xl font-semibold text-amber-800 ',
+                  isSelected
+                    ? 'transition-all duration-300 [text-shadow:1px_1px_2px_#78350f] group-hover:text-white group-hover:[text-shadow:0_0_1px_#fff,0_0_10px_#fff,0_0_15px_#f59e0b,0_0_20px_#f59e0b]'
+                    : ''
+                )}>
                 {playerData.lastName}
               </div>
             </div>
