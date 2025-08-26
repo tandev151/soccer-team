@@ -86,21 +86,21 @@ export const Header = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 border-t border-white/20 pt-4">
             <nav className="flex flex-col space-y-3">
-              <a href="/" className="text-white hover:text-yellow-300 transition-colors py-2 text-base font-medium">
+              <Link href="/" className="text-white hover:text-yellow-300 transition-colors py-2 text-base font-medium">
                 Home
-              </a>
-              <a href="/team" className="text-white hover:text-yellow-300 transition-colors py-2 text-base font-medium">
+              </Link>
+              <Link href="/team" className="text-white hover:text-yellow-300 transition-colors py-2 text-base font-medium">
                 Team
-              </a>
-              <a href="/matches" className="text-white hover:text-yellow-300 transition-colors py-2 text-base font-medium">
+              </Link>
+              <Link href="/matches" className="text-white hover:text-yellow-300 transition-colors py-2 text-base font-medium">
                 Matches
-              </a>
-              <a href="/news" className="text-white hover:text-yellow-300 transition-colors py-2 text-base font-medium">
+              </Link>
+              <Link href="/news" className="text-white hover:text-yellow-300 transition-colors py-2 text-base font-medium">
                 News
-              </a>
-              <a href="/about" className="text-white hover:text-yellow-300 transition-colors py-2 text-base font-medium">
+              </Link>
+              <Link href="/about" className="text-white hover:text-yellow-300 transition-colors py-2 text-base font-medium">
                 About
-              </a>
+              </Link>
             </nav>
           </div>
         )}
