@@ -112,3 +112,23 @@
 .embla__dot--selected:after {
   box-shadow: inset 0 0 0 0.2rem var(--text-body);
 }
+
+
+@media (max-width: 768px) {
+  .embla {
+    --slide-size: 60%;
+  }
+}
+
+@media (max-width: 480px) {
+  .embla {
+    --slide-size: 72%;
+  }
+}
+
+@media (max-width: 320px) {
+  .embla {
+    --slide-size: 100%;
+  }
+}
+
