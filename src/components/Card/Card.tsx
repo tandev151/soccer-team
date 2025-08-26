@@ -27,6 +27,9 @@ const Card = ({ className, playerData, isSelected }: Props) => {
 
   // Hàm để chuyển đổi trạng thái khi nhấp vào thẻ
   const handleCardClick = () => {
+    if (!isSelected) {
+      return;
+    }
     setIsActive(!isActive);
   };
 
@@ -36,7 +39,7 @@ const Card = ({ className, playerData, isSelected }: Props) => {
       className={cn(
         'group w-[250px] h-[400px] bg-transparent',
         className,
-        isSelected ? 'bg-blue-500' : ''
+        isSelected ? '' : 'opacity-50'
       )}
       style={{ perspective: '1000px' }} // Thuộc tính này cần thiết cho hiệu ứng 3D
       onClick={handleCardClick}>
@@ -50,7 +53,10 @@ const Card = ({ className, playerData, isSelected }: Props) => {
         })}>
         {/* === MẶT TRƯỚC CỦA THẺ (TRẠNG THÁI DEFAULT & HOVER) === */}
         <div
-          className='absolute w-full h-full p-2 box-border transition-transform duration-700 ease-in-out bg-gradient-to-bl from-orange-200 to-red-400 border-none cursor-pointer rounded-tl-3xl rounded-br-3xl'
+          className={cn(
+            'absolute w-full h-full p-2 box-border transition-transform duration-700 ease-in-out bg-gradient-to-bl from-orange-200 to-red-400 border-none  rounded-tl-3xl rounded-br-3xl',
+            isSelected ? 'cursor-pointer' : ''
+          )}
           style={{ backfaceVisibility: 'hidden' }} // Ẩn mặt này đi khi nó quay về phía sau
         >
           {/* Lớp nền gradient */}

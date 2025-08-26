@@ -70,7 +70,7 @@ export const Carousel = <T,>({
     // 2. Cấu trúc HTML mà Embla yêu cầu
     //    - embla: là container ngoài cùng
     //    - embla__viewport: là "khung nhìn", phần slide sẽ được hiển thị qua đây
-    <div className='embla outline-1'>
+    <div className='embla'>
       <div className='embla__viewport ' ref={emblaRef}>
         {/* embla__container: chứa tất cả các slide */}
         <div className='embla__container mt-20'>
