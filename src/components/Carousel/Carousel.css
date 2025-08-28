@@ -114,21 +114,88 @@
 }
 
 
-@media (max-width: 768px) {
+
+@media (min-width: 1440px) {
   .embla {
-    --slide-size: 60%;
+    --slide-size: 20%; /* 5 cards on large desktop */
+    --slide-spacing: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .embla {
+    --slide-size: 25%; /* 4 cards on desktop */
+    --slide-spacing: 3rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .embla {
+    --slide-size: 33.33%; /* 3 cards on tablet landscape */
+    --slide-spacing: 3.5rem;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 767px) {
+  .embla {
+    --slide-size: 50%; /* 2 cards on tablet portrait */
+    --slide-spacing: 4rem;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 639px) {
+  .embla {
+    --slide-size: 65%; /* 1.5 cards on large mobile */
+    --slide-spacing: 4.5rem;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 479px) {
+  .embla {
+    --slide-size: 75%; /* 1.3 cards on mobile */
+    --slide-spacing: 5rem;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 374px) {
+  .embla {
+    --slide-size: 85%; /* 1.2 cards on small mobile */
+    --slide-spacing: 5rem;
+  }
+}
+
+@media (max-width: 319px) {
+  .embla {
+    --slide-size: 100%; /* 1 card on very small screens */
+    --slide-spacing: 3rem;
+  }
+}
+
+/* Enhanced button responsiveness */
+@media (max-width: 768px) {
+  .embla__button {
+    width: 4rem;
+    height: 4rem;
+  }
+  
+  .embla__button__svg {
+    width: 40%;
+    height: 40%;
   }
 }
 
 @media (max-width: 480px) {
-  .embla {
-    --slide-size: 72%;
+  .embla__controls {
+    margin-top: 1rem;
   }
-}
-
-@media (max-width: 320px) {
-  .embla {
-    --slide-size: 100%;
+  
+  .embla__buttons {
+    gap: 1rem;
+  }
+  
+  .embla__button {
+    width: 3rem;
+    height: 3rem;
   }
 }
 
