@@ -1,16 +1,16 @@
 'use client';
 
-import { anphuPlayers, Player } from '@/constants/squash';
+import {
+  AnimatedCounter,
+  PlayerInfoCard,
+  ProgressBar
+} from '@/components/PlayerStats';
+import { anphuPlayers } from '@/constants/squash';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import React, { lazy, Suspense, memo, use } from 'react';
-import { 
-  PlayerInfoCard,
-  ProgressBar,
-  AnimatedCounter 
-} from '@/components/PlayerStats';
+import { lazy, memo, Suspense, use } from 'react';
 
 // Lazy load heavy chart components
 const AttributesRadarChart = lazy(() => import('@/components/PlayerStats/AttributesRadarChart').then(module => ({ default: module.AttributesRadarChart })));
@@ -23,6 +23,8 @@ const ChartSkeleton = memo(() => (
     <div className="text-gray-500">Loading chart...</div>
   </div>
 ));
+
+ChartSkeleton.displayName = 'ChartSkeleton';
 
 interface PlayerDetailPageProps {
   params: Promise<{

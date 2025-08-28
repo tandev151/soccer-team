@@ -1,19 +1,19 @@
 'use client';
 
 import { PlayerCareerStats } from '@/constants/squash';
-import { motion } from 'framer-motion';
-import React, { useRef } from 'react';
 import {
-  Chart as ChartJS,
   CategoryScale,
+  Chart as ChartJS,
+  Filler,
+  Legend,
   LinearScale,
-  PointElement,
   LineElement,
+  PointElement,
   Title,
   Tooltip,
-  Legend,
-  Filler,
 } from 'chart.js';
+import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
 import { Line } from 'react-chartjs-2';
 
 ChartJS.register(
@@ -119,9 +119,9 @@ export const CareerStatsChart: React.FC<CareerStatsChartProps> = ({
         cornerRadius: 8,
         displayColors: true,
         callbacks: {
-          label: function(context: any) {
-            const label = context.dataset.label;
-            const value = context.parsed.y;
+          label: function(tooltipItem: { dataset: { label?: string }; parsed: { y: number } }) {
+            const label = tooltipItem.dataset.label || '';
+            const value = tooltipItem.parsed.y;
             if (label === 'Overall Rating') {
               return `${label}: ${value}/100`;
             }
@@ -166,7 +166,7 @@ export const CareerStatsChart: React.FC<CareerStatsChartProps> = ({
           color: 'rgba(156, 163, 175, 1)',
           font: {
             size: 14,
-            weight: '600',
+            weight: 'bold' as const,
           },
         },
       },
@@ -191,7 +191,7 @@ export const CareerStatsChart: React.FC<CareerStatsChartProps> = ({
           color: 'rgba(156, 163, 175, 1)',
           font: {
             size: 14,
-            weight: '600',
+            weight: 'bold' as const,
           },
         },
       },

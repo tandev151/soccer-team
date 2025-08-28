@@ -1,17 +1,17 @@
 'use client';
 
 import { PlayerStats } from '@/constants/squash';
-import { motion } from 'framer-motion';
-import React, { useRef } from 'react';
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
   BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
   Title,
   Tooltip,
-  Legend,
 } from 'chart.js';
+import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
 import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(
@@ -71,7 +71,7 @@ export const StatsBarChart: React.FC<StatsBarChartProps> = ({ stats }) => {
         cornerRadius: 8,
         displayColors: false,
         callbacks: {
-          label: function(context: any) {
+          label: function(context: { label: string; parsed: { y: number } }) {
             const label = context.label;
             const value = context.parsed.y;
             if (label.includes('%')) {
@@ -113,7 +113,7 @@ export const StatsBarChart: React.FC<StatsBarChartProps> = ({ stats }) => {
     animation: {
       duration: 1500,
       easing: 'easeInOutQuart' as const,
-      delay: (context: any) => {
+      delay: (context: { dataIndex: number }) => {
         return context.dataIndex * 100;
       },
     },

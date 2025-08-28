@@ -1,8 +1,8 @@
 'use client';
-import dynamic from 'next/dynamic';
-import { Suspense, useState, useCallback, useMemo } from 'react';
 import { Carousel } from '@/components/Carousel/Carousel';
 import { anphuPlayers } from '@/constants/squash';
+import dynamic from 'next/dynamic';
+import { Suspense, useCallback, useMemo } from 'react';
 
 // Lazy load the Card component for better performance
 const Card = dynamic(

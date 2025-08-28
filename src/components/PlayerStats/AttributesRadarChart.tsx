@@ -1,17 +1,17 @@
 'use client';
 
 import { PlayerAttributes } from '@/constants/squash';
-import { motion } from 'framer-motion';
-import React, { useEffect, useRef } from 'react';
 import {
   Chart as ChartJS,
-  RadialLinearScale,
-  PointElement,
-  LineElement,
   Filler,
-  Tooltip,
   Legend,
+  LineElement,
+  PointElement,
+  RadialLinearScale,
+  Tooltip,
 } from 'chart.js';
+import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
 import { Radar } from 'react-chartjs-2';
 
 ChartJS.register(
@@ -74,7 +74,7 @@ export const AttributesRadarChart: React.FC<AttributesRadarChartProps> = ({
         cornerRadius: 8,
         displayColors: false,
         callbacks: {
-          label: function(context: any) {
+          label: function(context: { label: string; parsed: { r: number } }) {
             return `${context.label}: ${context.parsed.r}/100`;
           }
         }

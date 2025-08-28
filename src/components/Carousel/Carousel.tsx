@@ -1,11 +1,10 @@
 // components/Carousel.jsx
 'use client';
-import React, { ReactNode, useCallback, useEffect, useState } from 'react';
-import useEmblaCarousel from 'embla-carousel-react';
 import { EmblaOptionsType } from 'embla-carousel';
+import useEmblaCarousel from 'embla-carousel-react';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
 
 import './Carousel.css';
-import { cn } from '@/lib/utils';
 import {
   NextButton,
   PrevButton,

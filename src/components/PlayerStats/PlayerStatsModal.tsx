@@ -1,14 +1,12 @@
 'use client';
 
 import { Player } from '@/constants/squash';
-import { cn } from '@/lib/utils';
-import { motion, AnimatePresence } from 'framer-motion';
-// import { X } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
 import { AttributesRadarChart } from './AttributesRadarChart';
-import { StatsBarChart } from './StatsBarChart';
 import { CareerStatsChart } from './CareerStatsChart';
 import { PlayerInfoCard } from './PlayerInfoCard';
+import { StatsBarChart } from './StatsBarChart';
 
 interface PlayerStatsModalProps {
   player: Player | null;
