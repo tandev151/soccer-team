@@ -128,7 +128,7 @@ export default function Home({ params }: PageProps<'/[locale]'>) {
       <div className='pb-16 px-3'>
         <div className='text-center mb-8 px-4'>
           <h2 className='text-3xl sm:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-4'>
-            ⚽ Meet Our Players
+            {t('title')}
           </h2>
           <p className='text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto'>
             Discover the talented individuals who make An Phu F.C exceptional
