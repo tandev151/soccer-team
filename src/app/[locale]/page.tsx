@@ -2,8 +2,9 @@
 import { Carousel } from '@/components/Carousel/Carousel';
 import { anphuPlayers } from '@/constants/squash';
 import dynamic from 'next/dynamic';
-import { Suspense, useCallback, useMemo } from 'react';
-
+import { Suspense, use, useCallback, useMemo } from 'react';
+import { setRequestLocale } from 'next-intl/server';
+import { Locale, useTranslations } from 'next-intl';
 // Lazy load the Card component for better performance
 const Card = dynamic(
   () => import('@/components/Card/Card').then((mod) => ({ default: mod.Card })),
@@ -88,9 +89,15 @@ const TeamAchievements = () => {
   );
 };
 
-export default function Home() {
+export default function Home({ params }: PageProps<'/[locale]'>) {
   // Memoize carousel options for performance
   const carouselOptions = useMemo(() => ({}), []);
+  //   const { locale } = use(params);
+
+  // Enable static rendering
+  //   setRequestLocale(locale as Locale);
+
+  const t = useTranslations('Home');
 
   // Optimize player card rendering with useCallback
   const renderPlayerCard = useCallback(
