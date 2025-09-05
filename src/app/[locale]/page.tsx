@@ -1,64 +1,70 @@
 'use client';
 import { Carousel } from '@/components/Carousel/Carousel';
 import { anphuPlayers } from '@/constants/squash';
+import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
-import { Suspense, use, useCallback, useMemo } from 'react';
-import { setRequestLocale } from 'next-intl/server';
-import { Locale, useTranslations } from 'next-intl';
+import { Suspense, useCallback, useMemo } from 'react';
+import { HomeTranslationFunction } from '@/types/i18n';
+
+// Loading component with translations
+const LoadingCard = () => {
+  const t = useTranslations('Home');
+  return (
+    <div className='w-[280px] sm:w-[250px] h-[400px] bg-gradient-to-bl from-purple-200 to-red-200 rounded-tl-3xl rounded-br-3xl animate-pulse'>
+      <div className='flex justify-center items-center h-full'>
+        <div className='text-gray-500'>{t('loading')}</div>
+      </div>
+    </div>
+  );
+};
 // Lazy load the Card component for better performance
 const Card = dynamic(
   () => import('@/components/Card/Card').then((mod) => ({ default: mod.Card })),
   {
     ssr: true,
-    loading: () => (
-      <div className='w-[280px] sm:w-[250px] h-[400px] bg-gradient-to-bl from-purple-200 to-red-200 rounded-tl-3xl rounded-br-3xl animate-pulse'>
-        <div className='flex justify-center items-center h-full'>
-          <div className='text-gray-500'>Loading...</div>
-        </div>
-      </div>
-    )
+    loading: () => <LoadingCard />
   }
 );
 
 // Team achievements data
-const teamAchievements = [
+const getTeamAchievements = (t: HomeTranslationFunction) => [
   {
-    title: 'League Champions',
+    title: t('achievements.items.leagueChampions.title'),
     year: '2024',
-    description: 'Won the district championship with an unbeaten record',
+    description: t('achievements.items.leagueChampions.description'),
     icon: '🏆'
   },
   {
-    title: 'Top Scorer Award',
+    title: t('achievements.items.topScorer.title'),
     year: '2024',
-    description: 'Cong Danh led the league with 28 goals',
+    description: t('achievements.items.topScorer.description'),
     icon: '⚽'
   },
   {
-    title: 'Best Team Spirit',
+    title: t('achievements.items.bestTeamSpirit.title'),
     year: '2024',
-    description: 'Recognized for outstanding teamwork and sportsmanship',
+    description: t('achievements.items.bestTeamSpirit.description'),
     icon: '🤝'
   },
   {
-    title: 'Fair Play Award',
+    title: t('achievements.items.fairPlay.title'),
     year: '2024-2025',
-    description: 'Lowest number of disciplinary actions in the league',
+    description: t('achievements.items.fairPlay.description'),
     icon: '🏅'
   }
 ];
 
 // Featured Team Achievements Component
-const TeamAchievements = () => {
+const TeamAchievements = ({ t }: { t: HomeTranslationFunction }) => {
+  const teamAchievements = getTeamAchievements(t);
   return (
     <section className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
       <div className='text-center mb-12'>
         <h2 className='text-3xl sm:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-red-600 mb-4'>
-          🏆 Team Achievements
+          {t('achievements.title')}
         </h2>
         <p className='text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto'>
-          Celebrating our journey of excellence, teamwork, and dedication on and
-          off the field
+          {t('achievements.description')}
         </p>
       </div>
 
@@ -102,14 +108,7 @@ export default function Home({ params }: PageProps<'/[locale]'>) {
   // Optimize player card rendering with useCallback
   const renderPlayerCard = useCallback(
     (player: (typeof anphuPlayers)[0], isSelected: boolean) => (
-      <Suspense
-        fallback={
-          <div className='w-[280px] sm:w-[250px] h-[400px] bg-gradient-to-bl from-purple-200 to-red-200 rounded-tl-3xl rounded-br-3xl animate-pulse'>
-            <div className='flex justify-center items-center h-full'>
-              <div className='text-gray-500'>Loading...</div>
-            </div>
-          </div>
-        }>
+      <Suspense fallback={<LoadingCard />}>
         <Card
           playerData={player}
           isSelected={isSelected}
@@ -131,7 +130,7 @@ export default function Home({ params }: PageProps<'/[locale]'>) {
             {t('title')}
           </h2>
           <p className='text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto'>
-            Discover the talented individuals who make An Phu F.C exceptional
+            {t('playersSection.description')}
           </p>
         </div>
 
@@ -141,7 +140,7 @@ export default function Home({ params }: PageProps<'/[locale]'>) {
       </div>
 
       <div className='pt-8 pb-12'>
-        <TeamAchievements />
+        <TeamAchievements t={t} />
       </div>
     </div>
   );

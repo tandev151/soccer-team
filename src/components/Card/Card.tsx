@@ -4,7 +4,7 @@
 import { Player } from '@/constants/squash';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import React, { memo } from 'react';
 
 type Props = {
@@ -15,14 +15,16 @@ type Props = {
 
 const Card = memo(({ className, playerData, isSelected }: Props) => {
   const router = useRouter();
+  const params = useParams();
+  const locale = params?.locale as string || 'en';
 
   // Hàm để chuyển đổi trạng thái khi nhấp vào thẻ - navigate to player detail
   const handleCardClick = () => {
     if (!isSelected) {
       return;
     }
-    // Navigate to player detail page instead of flipping card
-    router.push(`/player/${playerData.id}`);
+    // Navigate to player detail page with locale support
+    router.push(`/${locale}/player/${playerData.id}`);
   };
 
   return (

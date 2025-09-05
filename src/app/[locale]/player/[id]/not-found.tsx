@@ -2,8 +2,14 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 export default function NotFound() {
+  const params = useParams();
+  const locale = params?.locale as string || 'en';
+  const t = useTranslations('Player.notFound');
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
       <motion.div
@@ -24,9 +30,9 @@ export default function NotFound() {
 
         {/* Error Message */}
         <div className="space-y-4">
-          <h1 className="text-4xl font-bold text-white">Player Not Found</h1>
+          <h1 className="text-4xl font-bold text-white">{t('title')}</h1>
           <p className="text-xl text-gray-400 max-w-md mx-auto">
-            The player you are looking for does not exist or has been removed from our database.
+            {t('description')}
           </p>
         </div>
 
@@ -38,17 +44,17 @@ export default function NotFound() {
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <Link
-            href="/"
+            href={`/${locale}`}
             className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
           >
-            Back to Team
+            {t('backToTeam')}
           </Link>
           
           <button
             onClick={() => window.history.back()}
             className="border border-gray-600 hover:bg-gray-800 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300"
           >
-            Go Back
+            {t('goBack')}
           </button>
         </motion.div>
 

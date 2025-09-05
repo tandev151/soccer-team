@@ -9,8 +9,9 @@ import { anphuPlayers } from '@/constants/squash';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 import { lazy, memo, Suspense, use } from 'react';
+import { useTranslations } from 'next-intl';
 
 // Lazy load heavy chart components
 const AttributesRadarChart = lazy(() => import('@/components/PlayerStats/AttributesRadarChart').then(module => ({ default: module.AttributesRadarChart })));
@@ -18,22 +19,27 @@ const StatsBarChart = lazy(() => import('@/components/PlayerStats/StatsBarChart'
 const CareerStatsChart = lazy(() => import('@/components/PlayerStats/CareerStatsChart').then(module => ({ default: module.CareerStatsChart })));
 
 // Chart loading skeleton
-const ChartSkeleton = memo(() => (
-  <div className="h-80 bg-gray-700 rounded-lg animate-pulse flex items-center justify-center">
-    <div className="text-gray-500">Loading chart...</div>
-  </div>
-));
+const ChartSkeleton = memo(() => {
+  const t = useTranslations('Player');
+  return (
+    <div className="h-80 bg-gray-700 rounded-lg animate-pulse flex items-center justify-center">
+      <div className="text-gray-500">{t('loadingChart')}</div>
+    </div>
+  );
+});
 
 ChartSkeleton.displayName = 'ChartSkeleton';
 
 interface PlayerDetailPageProps {
   params: Promise<{
     id: string;
+    locale: string;
   }>;
 }
 
 export default function PlayerDetailPage({ params }: PlayerDetailPageProps) {
-  const { id } = use(params);
+  const { id, locale } = use(params);
+  const t = useTranslations('Player');
   const player = anphuPlayers.find(p => p.id === parseInt(id));
 
   if (!player) {
@@ -96,13 +102,13 @@ export default function PlayerDetailPage({ params }: PlayerDetailPageProps) {
                 </h2>
                 <div className="flex flex-wrap justify-center lg:justify-start gap-4 text-lg text-white/80">
                   <span className="bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
-                    Position: {player.position}
+                    {t('labels.position')}: {player.position}
                   </span>
                   <span className="bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
-                    Age: {player.age}
+                    {t('labels.age')}: {player.age}
                   </span>
                   <span className="bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
-                    Nation: {player.nationality}
+                    {t('labels.nation')}: {player.nationality}
                   </span>
                 </div>
               </motion.div>
@@ -118,25 +124,25 @@ export default function PlayerDetailPage({ params }: PlayerDetailPageProps) {
                   <div className="text-3xl font-bold text-white">
                     <AnimatedCounter value={player.currentStats.goals} />
                   </div>
-                  <div className="text-white/70">Goals</div>
+                  <div className="text-white/70">{t('labels.goals')}</div>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
                   <div className="text-3xl font-bold text-white">
                     <AnimatedCounter value={player.currentStats.assists} />
                   </div>
-                  <div className="text-white/70">Assists</div>
+                  <div className="text-white/70">{t('labels.assists')}</div>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
                   <div className="text-3xl font-bold text-white">
                     <AnimatedCounter value={player.currentStats.matchesPlayed} />
                   </div>
-                  <div className="text-white/70">Matches</div>
+                  <div className="text-white/70">{t('labels.matches')}</div>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
                   <div className="text-3xl font-bold text-yellow-400">
                     <AnimatedCounter value={player.currentStats.overallRating} />
                   </div>
-                  <div className="text-white/70">Rating</div>
+                  <div className="text-white/70">{t('labels.rating')}</div>
                 </div>
               </motion.div>
             </div>
@@ -151,13 +157,13 @@ export default function PlayerDetailPage({ params }: PlayerDetailPageProps) {
           className="absolute top-6 left-6"
         >
           <Link
-            href="/"
+            href={`/${locale}`}
             className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg backdrop-blur-sm transition-all duration-300"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-            Back to Team
+            {t('backToTeam')}
           </Link>
         </motion.div>
       </div>
@@ -170,7 +176,7 @@ export default function PlayerDetailPage({ params }: PlayerDetailPageProps) {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.9 }}
         >
-          <h3 className="text-3xl font-bold text-white mb-8 text-center">Player Information</h3>
+          <h3 className="text-3xl font-bold text-white mb-8 text-center">{t('playerInformation')}</h3>
           <PlayerInfoCard player={player} />
         </motion.section>
 
@@ -183,13 +189,13 @@ export default function PlayerDetailPage({ params }: PlayerDetailPageProps) {
         >
           <h3 className="text-3xl font-bold text-white mb-8 text-center flex items-center justify-center gap-3">
             <span className="w-4 h-4 bg-blue-500 rounded-full"></span>
-            Player Attributes
+            {t('playerAttributes')}
           </h3>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Radar Chart */}
             <div className="space-y-6">
-              <h4 className="text-xl font-semibold text-white">Skill Overview</h4>
+              <h4 className="text-xl font-semibold text-white">{t('skillOverview')}</h4>
               <Suspense fallback={<ChartSkeleton />}>
                 <AttributesRadarChart attributes={player.attributes} />
               </Suspense>
@@ -197,7 +203,7 @@ export default function PlayerDetailPage({ params }: PlayerDetailPageProps) {
             
             {/* Progress Bars */}
             <div className="space-y-6">
-              <h4 className="text-xl font-semibold text-white">Detailed Attributes</h4>
+              <h4 className="text-xl font-semibold text-white">{t('detailedAttributes')}</h4>
               <div className="space-y-4">
                 {Object.entries(player.attributes).map(([key, value], index) => (
                   <ProgressBar
@@ -224,7 +230,7 @@ export default function PlayerDetailPage({ params }: PlayerDetailPageProps) {
           <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700">
             <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
               <span className="w-4 h-4 bg-green-500 rounded-full"></span>
-              Season Statistics
+              {t('seasonStatistics')}
             </h3>
             <Suspense fallback={<ChartSkeleton />}>
               <StatsBarChart stats={player.currentStats} />
@@ -235,40 +241,40 @@ export default function PlayerDetailPage({ params }: PlayerDetailPageProps) {
           <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700">
             <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
               <span className="w-4 h-4 bg-orange-500 rounded-full"></span>
-              Advanced Stats
+              {t('advancedStats')}
             </h3>
             
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-4">
                 <ProgressBar
-                  label="Pass Accuracy"
+                  label={t('labels.passAccuracy')}
                   value={player.currentStats.passAccuracy}
                   delay={0.1}
                 />
                 <ProgressBar
-                  label="Shot Accuracy"
+                  label={t('labels.shotAccuracy')}
                   value={player.currentStats.shotAccuracy}
                   delay={0.2}
                 />
                 <ProgressBar
-                  label="Dribble Success"
+                  label={t('labels.dribbleSuccess')}
                   value={player.currentStats.dribbleSuccess}
                   delay={0.3}
                 />
               </div>
               <div className="space-y-4">
                 <ProgressBar
-                  label="Tackle Success"
+                  label={t('labels.tackleSuccess')}
                   value={player.currentStats.tackleSuccess}
                   delay={0.4}
                 />
                 <ProgressBar
-                  label="Sprint Speed"
+                  label={t('labels.sprintSpeed')}
                   value={Math.round((player.currentStats.sprintSpeed / 35) * 100)}
                   delay={0.5}
                 />
                 <ProgressBar
-                  label="Stamina"
+                  label={t('labels.stamina')}
                   value={player.currentStats.stamina}
                   delay={0.6}
                 />
@@ -286,7 +292,7 @@ export default function PlayerDetailPage({ params }: PlayerDetailPageProps) {
         >
           <h3 className="text-3xl font-bold text-white mb-8 text-center flex items-center justify-center gap-3">
             <span className="w-4 h-4 bg-purple-500 rounded-full"></span>
-            Career Progress
+            {t('careerProgress')}
           </h3>
           <Suspense fallback={<ChartSkeleton />}>
             <CareerStatsChart careerStats={player.careerStats} />

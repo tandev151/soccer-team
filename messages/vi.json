@@ -1,5 +1,69 @@
 {
   "Home": {
-    "title": "Xin chao"
+    "title": "Xin chao",
+    "loading": "Đang tải...",
+    "playersSection": {
+      "description": "Khám phá những cá nhân tài năng tạo nên sự đặc biệt của An Phu F.C"
+    },
+    "achievements": {
+      "title": "🏆 Thành Tích Đội Bóng",
+      "description": "Tôn vinh hành trình xuất sắc, tinh thần đồng đội và sự cống hiến cả trên và ngoài sân cỏ",
+      "items": {
+        "leagueChampions": {
+          "title": "Vô Địch Giải Đấu",
+          "description": "Vô địch giải quận với thành tích bất bại"
+        },
+        "topScorer": {
+          "title": "Giải Cầu Thủ Ghi Bàn Nhiều Nhất", 
+          "description": "Công Danh dẫn đầu giải với 28 bàn thắng"
+        },
+        "bestTeamSpirit": {
+          "title": "Tinh Thần Đội Bóng Tốt Nhất",
+          "description": "Được công nhận vì tinh thần đồng đội và thể thao xuất sắc"
+        },
+        "fairPlay": {
+          "title": "Giải Fair Play",
+          "description": "Số lượng vi phạm kỷ luật ít nhất trong giải đấu"
+        }
+      }
+    }
+  },
+  "Player": {
+    "backToTeam": "Quay lại Đội",
+    "playerInformation": "Thông Tin Cầu Thủ",
+    "playerAttributes": "Thuộc Tính Cầu Thủ",
+    "skillOverview": "Tổng Quan Kỹ Năng",
+    "detailedAttributes": "Thuộc Tính Chi Tiết",
+    "seasonStatistics": "Thống Kê Mùa Giải",
+    "advancedStats": "Thống Kê Nâng Cao",
+    "careerProgress": "Tiến Trình Sự Nghiệp",
+    "loadingChart": "Đang tải biểu đồ...",
+    "labels": {
+      "position": "Vị trí",
+      "age": "Tuổi", 
+      "nation": "Quốc tịch",
+      "goals": "Bàn thắng",
+      "assists": "Kiến tạo",
+      "matches": "Trận đấu",
+      "rating": "Đánh giá",
+      "passAccuracy": "Độ chính xác chuyền bóng",
+      "shotAccuracy": "Độ chính xác sút bóng",
+      "dribbleSuccess": "Thành công rê bóng",
+      "tackleSuccess": "Thành công tắc bóng",
+      "sprintSpeed": "Tốc độ chạy nước rút",
+      "stamina": "Thể lực"
+    },
+    "notFound": {
+      "title": "Không Tìm Thấy Cầu Thủ",
+      "description": "Cầu thủ bạn đang tìm kiếm không tồn tại hoặc đã bị xóa khỏi cơ sở dữ liệu.",
+      "backToTeam": "Quay lại Đội",
+      "goBack": "Quay Lại"
+    },
+    "metadata": {
+      "notFoundTitle": "Không Tìm Thấy Cầu Thủ - An Phu F.C",
+      "notFoundDescription": "Không thể tìm thấy cầu thủ được yêu cầu.",
+      "descriptionTemplate": "Thống kê chi tiết và thông tin về {firstName} {lastName}, cầu thủ {position} của Câu lạc bộ bóng đá An Phú.",
+      "ogDescriptionTemplate": "Xem thống kê chi tiết của {firstName} {lastName}"
+    }
   }
 }
